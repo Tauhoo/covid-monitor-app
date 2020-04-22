@@ -8,6 +8,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#fff",
     padding: 8,
+    marginVertical: 5,
   },
   title: {
     paddingVertical: 10,

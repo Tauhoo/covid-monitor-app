@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { StyleSheet, Text, ScrollView } from "react-native"
+import { StyleSheet, ScrollView } from "react-native"
 import Notification from "./components/Notification"
+import Status from "./components/Status"
 import { queryNotification } from "./api"
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       {notification.map((props, index) => (
         <Notification key={index + ""} {...props} />
       ))}
+      <Status></Status>
     </ScrollView>
   )
 }
