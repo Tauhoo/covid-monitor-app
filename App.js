@@ -1,27 +1,32 @@
-import React, { useEffect } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import React, { useState, useEffect } from "react"
+import { StyleSheet, Text, ScrollView } from "react-native"
+import Notification from "./components/Notification"
 import { queryNotification } from "./api"
 
 export default function App() {
+  const [notification, updateNotification] = useState([])
+
   useEffect(() => {
-    async function fetchData() {
+    async function fetchNotification() {
       const res = await queryNotification()
-      console.log(res.data)
+      updateNotification(res.data.Data)
     }
-    fetchData()
-  })
+    fetchNotification()
+  }, [])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      {notification.map((props, index) => (
+        <Notification key={index + ""} {...props} />
+      ))}
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#dfe4ea",
+    paddingTop: 30,
+    paddingHorizontal: 10,
   },
 })
