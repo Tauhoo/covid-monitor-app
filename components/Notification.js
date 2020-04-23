@@ -14,7 +14,7 @@ const style = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 10,
-    backgroundColor: "#a4b0be",
+    backgroundColor: "#6c5ce7",
     width: "100%",
   },
   contentContainer: {
@@ -35,11 +35,11 @@ export default ({
   return (
     <View style={style.container}>
       <View style={style.title}>
-        <Text style={{ fontSize: 20 }}>
+        <Text style={{ fontSize: 20, color: "white" }}>
           ประกาศ
           <Text
             style={{
-              color: "#2f3542",
+              color: "#CCC",
               marginBottom: 2,
               marginLeft: 5,
               fontSize: 12,
@@ -48,7 +48,7 @@ export default ({
             {"  " + timestamp}
           </Text>
         </Text>
-        <Text style={{ marginTop: 5 }}>{AnnounceBy}</Text>
+        <Text style={{ marginTop: 5, color: "white" }}>{AnnounceBy}</Text>
       </View>
       <View style={style.contentContainer}>
         <Text>{Date}</Text>

@@ -10,7 +10,7 @@ const style = StyleSheet.create({
   wraper: {
     paddingHorizontal: 15,
     paddingVertical: 5,
-    backgroundColor: "#ccc",
+    backgroundColor: "#a29bfe",
     borderRadius: 10,
   },
 })

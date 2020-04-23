@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { StyleSheet, ScrollView } from "react-native"
+import { StyleSheet, ScrollView, View, Text } from "react-native"
 import Notification from "./components/Notification"
 import Status from "./components/Status"
 import Stat from "./components/Stat"
@@ -17,20 +17,30 @@ export default function App() {
   }, [])
 
   return (
-    <ScrollView style={styles.container}>
-      {notification.map((props, index) => (
-        <Notification key={index + ""} {...props} />
-      ))}
-      <Status></Status>
-      <Stat></Stat>
-    </ScrollView>
+    <>
+      <View style={styles.Navbar}>
+        <Text style={{ color: "white", fontSize: 20 }}>Covid monitor</Text>
+      </View>
+      <ScrollView style={styles.container}>
+        {notification.map((props, index) => (
+          <Notification key={index + ""} {...props} />
+        ))}
+        <Status></Status>
+        <Stat></Stat>
+      </ScrollView>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#dfe4ea",
-    paddingTop: 30,
     paddingHorizontal: 10,
+  },
+  Navbar: {
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    paddingTop: 30,
+    backgroundColor: "#6c5ce7",
   },
 })

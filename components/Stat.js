@@ -15,7 +15,7 @@ const style = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 10,
-    backgroundColor: "#a4b0be",
+    backgroundColor: "#6c5ce7",
     width: "100%",
   },
   contentContainer: {
@@ -65,10 +65,15 @@ const convertor = (list, index) => {
   let values = []
   let number = 0
   for (const data of list) {
-    if (number % 2 === 0) {
-      labels = [data.Date, ...labels]
+    if (number % 3 === 0) {
+      if (number % 4 === 0) {
+        labels = [data.Date, ...labels]
+      } else {
+        labels = ["", ...labels]
+      }
       values = [data[index], ...values]
     }
+    number++
   }
   return { labels, values }
 }
@@ -93,7 +98,7 @@ export default () => {
   return (
     <View style={style.container}>
       <View style={style.title}>
-        <Text style={{ fontSize: 20 }}>สถิติ</Text>
+        <Text style={{ fontSize: 20, color: "white" }}>สถิติ</Text>
       </View>
       <SelectInput
         value={index}
@@ -108,8 +113,8 @@ export default () => {
         labelStyle={style.DisplayText}
         onValueChange={(value) => setIndex(value)}
       />
-      <View style={{ width: "100%" }}>
-        <ScrollView horizontal={true}>
+      <View>
+        <ScrollView horizontal={true} style={{ borderRadius: 10 }}>
           <LineChart
             data={{
               labels: convertedData.labels,
@@ -119,16 +124,15 @@ export default () => {
                 },
               ],
             }}
-            width={convertedData.labels.length * 25} // from react-native
-            height={200}
-            yAxisLabel='$'
-            yAxisSuffix='k'
+            width={convertedData.labels.length * 35} // from react-native
+            height={350}
+            yAxisSuffix=' คน'
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
               backgroundColor: "#e26a00",
               backgroundGradientFrom: "#fb8c00",
               backgroundGradientTo: "#ffa726",
-              decimalPlaces: 2, // optional, defaults to 2dp
+              decimalPlaces: 0, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
@@ -140,10 +144,10 @@ export default () => {
                 stroke: "#ffa726",
               },
             }}
-            bezier
             style={{
-              marginVertical: 8,
-              borderRadius: 16,
+              backgroundColor: "#6c5ce7",
+              paddingTop: 20,
+              paddingHorizontal: 20,
             }}
           />
         </ScrollView>

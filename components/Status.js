@@ -16,7 +16,7 @@ const style = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 10,
-    backgroundColor: "#a4b0be",
+    backgroundColor: "#6c5ce7",
     width: "100%",
   },
   contentContainer: {
@@ -60,7 +60,7 @@ export default () => {
   return (
     <View style={style.container}>
       <View style={style.title}>
-        <Text style={{ fontSize: 20 }}>สถานการณ์</Text>
+        <Text style={{ fontSize: 20, color: "white" }}>สถานการณ์</Text>
       </View>
       <View style={style.contentContainer}>
         <StatusCard title='ตรวจพบสะสม'>{Confirmed}</StatusCard>
