@@ -148,6 +148,7 @@ export default () => {
               backgroundColor: "#6c5ce7",
               paddingTop: 20,
               paddingHorizontal: 20,
+              borderRadius: 10,
             }}
           />
         </ScrollView>
