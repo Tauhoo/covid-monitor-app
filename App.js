@@ -25,7 +25,7 @@ export default function App() {
   }, [loading])
 
   return (
-    <>
+    <View style={styles.background}>
       <View style={styles.navbar}>
         <Text style={{ color: "white", fontSize: 20 }}>โควิด มอนิเตอร์</Text>
         <TouchableOpacity onPress={() => setLoading(true)}>
@@ -55,11 +55,15 @@ export default function App() {
           </View>
         </ScrollView>
       )}
-    </>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  background: {
+    backgroundColor: "#dfe4ea",
+    height: "100%",
+  },
   container: {
     backgroundColor: "#dfe4ea",
     paddingHorizontal: 10,
