@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, StyleSheet, ScrollView, Picker } from "react-native"
+import { View, Text, StyleSheet, ScrollView } from "react-native"
 import { LineChart } from "react-native-chart-kit"
+import SelectInput from "react-native-select-input-ios"
 import { queryTimeline } from "../api"
 
 const style = StyleSheet.create({
@@ -21,6 +22,19 @@ const style = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     paddingTop: 5,
+  },
+  SelectorText: {
+    fontSize: 20,
+  },
+  DisplayText: {
+    fontSize: 18,
+    textAlign: "center",
+  },
+  optionContainer: {
+    backgroundColor: "#f1f2f6",
+    marginVertical: 10,
+    borderRadius: 10,
+    paddingVertical: 10,
   },
 })
 
@@ -47,8 +61,6 @@ const indexDataTH = [
 ]
 
 const convertor = (list, index) => {
-  console.log("workk" + index)
-
   let labels = []
   let values = []
   let number = 0
@@ -62,63 +74,52 @@ const convertor = (list, index) => {
 }
 
 export default () => {
-  const [stat, setStat] = useState({ labels: [], values: [] })
-  const [loading, setLoading] = useState(true)
   const [index, setIndex] = useState("Confirmed")
+  const [data, setData] = useState(null)
 
   async function fetchStatus() {
     const res = await queryTimeline()
-    const data = convertor(res.data.Data, index)
-    console.log(1)
-
-    setStat(data)
+    setData(res.data.Data)
   }
 
   useEffect(() => {
     fetchStatus()
   }, [])
 
-  useEffect(() => {
-    fetchStatus()
-  }, [index])
+  if (data === null) return null
 
-  useEffect(() => {
-    console.log(2)
+  const convertedData = convertor(data, index)
 
-    setLoading(false)
-  }, [stat])
-
-  if (loading || stat.values.length <= 0 || stat.labels.length <= 0) return null
   return (
     <View style={style.container}>
       <View style={style.title}>
         <Text style={{ fontSize: 20 }}>สถิติ</Text>
       </View>
-      <Picker
-        selectedValue={index}
-        style={{ width: "100%" }}
+      <SelectInput
+        value={index}
+        options={indexData.map((value, index) => ({
+          value,
+          label: indexDataTH[index],
+        }))}
+        cancelKeyText='ยกเลิก'
+        submitKeyText='ตกลง'
+        style={style.optionContainer}
+        buttonsTextStyle={style.SelectorText}
+        labelStyle={style.DisplayText}
         onValueChange={(value) => setIndex(value)}
-      >
-        {indexData.map((value, index) => (
-          <Picker.Item
-            label={indexDataTH[index]}
-            key={value}
-            value={indexData[index]}
-          />
-        ))}
-      </Picker>
+      />
       <View style={{ width: "100%" }}>
         <ScrollView horizontal={true}>
           <LineChart
             data={{
-              labels: stat.labels,
+              labels: convertedData.labels,
               datasets: [
                 {
-                  data: stat.values,
+                  data: convertedData.values,
                 },
               ],
             }}
-            width={stat.labels.length * 25} // from react-native
+            width={convertedData.labels.length * 25} // from react-native
             height={200}
             yAxisLabel='$'
             yAxisSuffix='k'
