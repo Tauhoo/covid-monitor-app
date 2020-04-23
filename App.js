@@ -26,19 +26,33 @@ export default function App() {
 
   return (
     <>
-      <View style={styles.Navbar}>
-        <Text style={{ color: "white", fontSize: 20 }}>Covid monitor</Text>
+      <View style={styles.navbar}>
+        <Text style={{ color: "white", fontSize: 20 }}>โควิด มอนิเตอร์</Text>
         <TouchableOpacity onPress={() => setLoading(true)}>
-          <Text style={{ color: "white", fontSize: 15 }}>Refresh</Text>
+          <Text style={{ color: "white", fontSize: 15 }}>รีเฟรช</Text>
         </TouchableOpacity>
       </View>
       {loading ? null : (
-        <ScrollView style={styles.container}>
-          {notification.map((props, index) => (
-            <Notification key={index + ""} {...props} />
-          ))}
-          <Status></Status>
-          <Stat></Stat>
+        <ScrollView>
+          <View style={styles.container}>
+            {notification.map((props, index) => (
+              <Notification key={index + ""} {...props} />
+            ))}
+            <Status></Status>
+            <Stat></Stat>
+          </View>
+          <View style={styles.footer}>
+            <Text style={styles.credit}>
+              ข้อมูลจาก https:covid19.th-stat.com
+            </Text>
+            <Text style={styles.credit}>
+              เซิร์ฟเวอร์โดย https:smilehost.asia
+            </Text>
+            <Text style={styles.credit}>พัตนาข้อมูลโดย www.kidkarnmai.com</Text>
+            <Text style={styles.credit}>
+              พัตนาแอพพลิเคชั่นโดย วชิรวิทย์ เวชรักษ์
+            </Text>
+          </View>
         </ScrollView>
       )}
     </>
@@ -50,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#dfe4ea",
     paddingHorizontal: 10,
   },
-  Navbar: {
+  navbar: {
     paddingHorizontal: 20,
     paddingBottom: 10,
     paddingTop: 30,
@@ -58,5 +72,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  footer: {
+    backgroundColor: "#2d3436",
+    padding: 20,
+  },
+  credit: {
+    color: "white",
+    marginVertical: 5,
   },
 })
