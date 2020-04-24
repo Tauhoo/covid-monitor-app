@@ -1,28 +1,29 @@
 {
   "expo": {
-    "name": "covid-monitor",
-    "slug": "covid-monitor",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "name": "Thailand covid monitor",
+    "slug": "thailand-covid-monitor",
+    "description": "This is covid monitor in thailand.",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/loading.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#6c5ce7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.wachirawit.thailand-covid-monitor",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.wachirawit.thailand_covid_monitor",
+      "versionCode": 1
     }
   }
 }

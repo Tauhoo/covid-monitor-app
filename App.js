@@ -21,6 +21,8 @@ export default function App() {
     async function fetchNotification() {
       try {
         const res = await queryNotification()
+        if (!Array.isArray(res.data)) return setLoading(false)
+
         updateNotification(res.data.Data)
         setLoading(false)
       } catch (e) {
